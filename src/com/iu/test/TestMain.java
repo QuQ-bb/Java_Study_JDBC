@@ -1,12 +1,12 @@
 package com.iu.test;
 
-import com.iu.util.DBCconnector;
+import com.iu.util.DBConnector;
 
 public class TestMain {
 
 	public static void main(String[] args) {
 	
-		DBCconnector dbcConnector = new DBCconnector();
+		DBConnector dbcConnector = new DBConnector();
 		
 		try {
 			dbcConnector.getConnection();
