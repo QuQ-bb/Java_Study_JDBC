@@ -33,12 +33,12 @@ public class RegionsDAO {
 		String rName= null;
 		if(rs.next()) {
 			regionsDTO = new RegionsDTO();
-			 rId = rs.getInt(1);
-			 rName = rs.getString(2);
+//			 rId = rs.getInt(1);
+//			 rName = rs.getString(2);
 //			System.out.println(rId);
 //			System.out.println(rName);
-			 regionsDTO.setRegion_id(rId);
-			 regionsDTO.setRegions_name(rs.getString(2));
+			 regionsDTO.setRegion_id(rs.getInt("REGION_ID"));
+			 regionsDTO.setRegions_name(rs.getString("REGION_NAME"));
 		}//if
 		
 		//6.자원해제
