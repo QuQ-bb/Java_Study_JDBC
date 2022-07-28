@@ -36,17 +36,38 @@ public class TestMain {
 		try {
 //			ArrayList<RegionsDTO> al =  regionsDAO.getList();
 //			regionsDTO = regionsDAO.getDetail(2);
-//			countriesDAO.getList();
-//			countriesDTO = countriesDAO.getDetail("US");
 //			rv.view(regionsDTO);
 //			rv.viewAll(al);
+//			regionsDTO = new RegionsDTO();
+//			regionsDTO.setRegion_id(6);
+//			regionsDTO.setRegions_name("Mars");
+//			int result = regionsDAO.setRegion(regionsDTO);
+//			if(result >0) {
+//				System.out.println("성공");
+//			}else {
+//				System.out.println("실패");
+//			}
+//			countriesDAO.getList();
+//			countriesDTO = countriesDAO.getDetail("US");
 //			cv.view(countriesDTO);
 //			cv.viewAll(countriesDAO.getList());
-			ArrayList<EmployeesDTO> al = employeesDAO.getList();
-			ev.viewAll(al);
+			countriesDTO = new CountriesDTO();
+			countriesDTO.setCountry_id("TW");
+			countriesDTO.setCountry_name("Taiwan");
+			countriesDTO.setRegion_id(3);
+			int result = countriesDAO.setCountry(countriesDTO);
+			
+			if(result >0) {
+				System.out.println("성공");
+			}else {
+				System.out.println("실패");
+			}
+			
+//			ArrayList<EmployeesDTO> al = employeesDAO.getList();
+//			ev.viewAll(al);
 //			employeesDTO = employeesDAO.getDetail(206);
 //			ev.view(employeesDTO);
-			
+//			employeesDAO.getSalaryInfo();
 		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 			e.printStackTrace();

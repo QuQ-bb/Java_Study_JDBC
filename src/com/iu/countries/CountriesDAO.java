@@ -10,10 +10,31 @@ import com.iu.util.DBConnector;
 public class CountriesDAO {
 
 	CountriesDTO countriesDTO =null;
+	//setCountry
+	public int setCountry(CountriesDTO countriesDTO)throws Exception {
+		Connection con = DBConnector.getConnection();
+		String sql ="INSERT INTO COUNTRIES VALUES(?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, countriesDTO.getCountry_id());
+		ps.setString(2, countriesDTO.getCountry_name());
+		ps.setInt(3, countriesDTO.getRegion_id());
+		
+		int result = ps.executeUpdate();
+		
+		DBConnector.disConnect(ps, con);
+		return result;
+	}
+	
+	
 	//getDetail :countries_id
 	public CountriesDTO getDetail(String country_id)throws Exception {
 		Connection con = DBConnector.getConnection();
-		String sql ="SELECT * FROM COUNTRIES WHERE COUNTRY_ID=?";
+		String sql = "SELECT * FROM COUNTRIES WHERE COUNTRY_ID=?";
+//		String sql = "SELECT * FROM COUNTRIES WHERE COUNTRY_ID LIKE '%?%'";
+		//이런식으로 ''로 한번에 묶어버리면 오류남 WHY? 자동으로 SET할때 ' '를 넣어주기 때문이다
+		
+//		String sql = "SELECT * FROM COUNTRIES WHERE COUNTRY_ID LIKE '%'||?||'%'";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, country_id);
 		

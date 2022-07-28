@@ -10,6 +10,24 @@ import com.iu.util.DBConnector;
 public class EmployeesDAO {
 	EmployeesDTO employeesDTO = null;
 	
+	public void getSalaryInfo()throws Exception {
+		Connection con = DBConnector.getConnection();
+		String sql = "SELECT SUM(SALARY), AVG(SALARY),MAX(SALARY)AS MAX FROM EMPLOYEES";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+		int sum	= rs.getInt("SUM(SALARY)");	//조회할 컬럼명
+		double avg = rs.getDouble(2);	//인덱스번호를 사용해서 부르기
+		int max  = rs.getInt("MAX");	//별칭을 정해줘서 문자열줄이기
+		System.out.println("SUM = "+sum);
+		System.out.println("AVG = "+avg);
+		System.out.println("MAX = "+max);
+		}
+		
+		DBConnector.disConnect(rs, ps, con);
+	}
+	
 	public EmployeesDTO getDetail(int employee_id)throws Exception {
 		Connection con = DBConnector.getConnection();
 		String sql = "SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID=?";
