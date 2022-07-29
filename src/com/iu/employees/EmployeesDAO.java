@@ -10,6 +10,31 @@ import com.iu.util.DBConnector;
 public class EmployeesDAO {
 	EmployeesDTO employeesDTO = null;
 	
+	public void getJoinTest(EmployeesDTO employeesDTO)throws Exception{
+		Connection con = DBConnector.getConnection();
+		String sql  = "SELECT E.EMPLOYEE_ID, E.FIRST_NAME, D.DEPARTMENT_NAME "
+					+ "FROM EMPLOYEES E "
+					+	"INNER JOIN "
+					+	"DEPARTMENTS D "
+					+	"ON E.DEPARTMENT_ID = D.DEPARTMENT_ID "
+					+	"WHERE E.EMPLOYEE_ID =? ";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1,employeesDTO.getEmployee_id());
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			employeesDTO = new EmployeesDTO();
+			employeesDTO.setLast_name(rs.getString("LAST_NAME"));
+			employeesDTO.setSalary(rs.getInt("SALARY"));
+			//여기없는 컬럼을 사용하고 싶으면 어떻게 해야하는가?
+			//상속을 받던가 		= IS A 개념을 맞춰보기 
+			// 멤버변수로 선언하던가 = HAS A 개념 맞춰보기
+			//안꺼내오는건 안쓰면 됨
+			//부서는 사원을 가지고 있다. 
+		}
+		DBConnector.disConnect(rs, ps, con);
+	}
+	
 	public void getSalaryInfo()throws Exception {
 		Connection con = DBConnector.getConnection();
 		String sql = "SELECT SUM(SALARY), AVG(SALARY),MAX(SALARY)AS MAX FROM EMPLOYEES";
